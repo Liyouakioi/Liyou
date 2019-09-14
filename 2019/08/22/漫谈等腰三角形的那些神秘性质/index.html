@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+  <link rel="alternate" href="/atom.xml" title="Liyou's Blog" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Kopieren',
+      copy_success: 'Kopiert',
+      copy_failure: 'Kopieren fehlgeschlagen'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="等腰三角形（isosceles triangle），指至少有两边相等的三角形，相等的两个边称为这个三角形的腰。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="漫谈等腰三角形的那些神秘性质">
+<meta property="og:url" content="http://yoursite.com/2019/08/22/漫谈等腰三角形的那些神秘性质/index.html">
+<meta property="og:site_name" content="Liyou&#39;s Blog">
+<meta property="og:description" content="等腰三角形（isosceles triangle），指至少有两边相等的三角形，相等的两个边称为这个三角形的腰。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.loli.net/2019/08/23/bpPowUzCOWlyFHf.png">
+<meta property="og:image" content="https://i.loli.net/2019/08/23/1NftxHqiTe5CKr9.png">
+<meta property="og:image" content="https://i.loli.net/2019/08/23/6BlRGsVw71nohvI.png">
+<meta property="og:image" content="https://i.loli.net/2019/08/23/Vs7Dz1MACX6nJot.png">
+<meta property="og:updated_time" content="2019-09-13T13:27:53.415Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="漫谈等腰三角形的那些神秘性质">
+<meta name="twitter:description" content="等腰三角形（isosceles triangle），指至少有两边相等的三角形，相等的两个边称为这个三角形的腰。">
+<meta name="twitter:image" content="https://i.loli.net/2019/08/23/bpPowUzCOWlyFHf.png">
+  <link rel="canonical" href="http://yoursite.com/2019/08/22/漫谈等腰三角形的那些神秘性质/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>漫谈等腰三角形的那些神秘性质 | Liyou's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Liyou's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">一个十分蒟蒻的博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Navigationsleiste an/ausschalten">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/22/漫谈等腰三角形的那些神秘性质/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liyou's Blog">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Liyou's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">漫谈等腰三角形的那些神秘性质
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Veröffentlicht am</span>
+
+              
+                
+              
+
+              <time title="Erstellt: 2019-08-22 14:04:38" itemprop="dateCreated datePublished" datetime="2019-08-22T14:04:38+08:00">2019-08-22</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Bearbeitet am</span>
+                <time title="Geändert am: 2019-09-13 21:27:53" itemprop="dateModified" datetime="2019-09-13T21:27:53+08:00">2019-09-13</time>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h6 id="等腰三角形（isosceles-triangle），指至少有两边相等的三角形，相等的两个边称为这个三角形的腰。"><a href="#等腰三角形（isosceles-triangle），指至少有两边相等的三角形，相等的两个边称为这个三角形的腰。" class="headerlink" title="等腰三角形（isosceles triangle），指至少有两边相等的三角形，相等的两个边称为这个三角形的腰。"></a>等腰三角形（isosceles triangle），指至少有两边相等的三角形，相等的两个边称为这个三角形的腰。</h6><a id="more"></a>
+<p>等腰三角形中有如下关系：</p>
+<ul>
+<li><p>三角形三内角和等于180°。</p>
+</li>
+<li><p>三角形的一个外角等于和它不相邻的两个内角之和。</p>
+</li>
+<li><p>三角形的一个外角大于任何一个和它不相邻的内角。</p>
+</li>
+<li><p>三角形两边之和大于第三边，两边之差小于第三边。</p>
+</li>
+<li><p>在同一个三角形内，等边对等角，等角对等边。</p>
+</li>
+</ul>
+<h4 id="（废话！）"><a href="#（废话！）" class="headerlink" title="（废话！）"></a>（废话！）</h4><hr>
+<p>性质：</p>
+<ol>
+<li><p>等腰三角形的两个底角度数相等（简写成“等边对等角”）。</p>
+</li>
+<li><p>等腰三角形的顶角平分线，底边上的中线，底边上的高相互重合（简写成“等腰三角形三线合一”）。</p>
+</li>
+<li><p>等腰三角形的两底角的平分线相等（两条腰上的中线相等，两条腰上的高相等）。</p>
+</li>
+<li><p>等腰三角形底边上的垂直平分线到两条腰的距离相等。</p>
+</li>
+<li><p>等腰三角形的一腰上的高与底边的夹角等于顶角的一半。</p>
+</li>
+<li><p>等腰三角形底边上任意一点到两腰距离之和等于一腰上的高（需用等面积法证明）。</p>
+</li>
+<li><p>一般的等腰三角形是轴对称图形,只有一条对称轴，顶角平分线所在的直线是它的对称轴。但等边三角形（特殊的等腰三角形）有三条对称轴。每个角的角平分线所在的直线，三条中线所在的直线，和高所在的直线就是等边三角形的对称轴。</p>
+</li>
+<li><p>等腰三角形中腰长的平方等于底边上高的平方加底的一半的平方（勾股定理）。</p>
+</li>
+<li><p>等腰三角形的腰与它的高的关系：腰大于高；腰的平方等于高的平方加底的一半的平方[1]。</p>
+</li>
+</ol>
+<h4 id="（比较多，慢慢看）"><a href="#（比较多，慢慢看）" class="headerlink" title="（比较多，慢慢看）"></a>（比较多，慢慢看）</h4><hr>
+<h1 id="重磅头戏！——两圆一中垂"><a href="#重磅头戏！——两圆一中垂" class="headerlink" title="重磅头戏！——两圆一中垂"></a>重磅头戏！——两圆一中垂</h1><p>假设题目（基本上大部分题目都是这个题型：）<br>已知有A,B两确定了的点，求另一点C在坐标轴上(x轴上、y轴上、某直线上、某抛物线上、某双曲线上、某弧上等等)且使△ABC为等腰三角形<br>本经验以在坐标轴上为例进行说明。</p>
+<p><img src="https://i.loli.net/2019/08/23/bpPowUzCOWlyFHf.png" alt></p>
+<p>第一步，很简单，把AB连接起来。</p>
+<p><img src="https://i.loli.net/2019/08/23/1NftxHqiTe5CKr9.png" alt></p>
+<p>第二步，分别以A,B为圆心，以AB为半径画圆。<br>如果数学术语有些困难的你，不能很好地理解这句话，那么请看上面这幅图。请画这样两个圆。</p>
+<p><img src="https://i.loli.net/2019/08/23/6BlRGsVw71nohvI.png" alt></p>
+<p>第三步，做AB的垂直平分线，或者直接连接两圆的交点。<br>一定要将这条线延伸到尽可能长的长度，以免漏下情况！</p>
+<p><img src="https://i.loli.net/2019/08/23/Vs7Dz1MACX6nJot.png" alt></p>
+<p>恭喜你，工作已经完成了。本道题目的要求是：让点C在坐标轴上，那么请找出图中橙色的线（也就是你刚刚作出的线）与坐标轴的交点，就是所有符合题目要求的点。见图中的绿色小点。<br>如果题目要求是在x轴上，就只找橙色的线与x轴的交点；如果是一条抛物线上，就只找橙色的线与抛物线的交点。以此类推，你还会漏掉情况吗？</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Beitragsautor:  </strong>Liyou's Blog</li>
+  <li class="post-copyright-link">
+    <strong>Beitragslink: </strong>
+    <a href="http://yoursite.com/2019/08/22/漫谈等腰三角形的那些神秘性质/" title="漫谈等腰三角形的那些神秘性质">http://yoursite.com/2019/08/22/漫谈等腰三角形的那些神秘性质/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Urheberrechtshinweis:  </strong>Alle Artikel in diesem Blog sind unter <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> lizenziert, außer es wird anders angegeben.</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/08/22/Who-is-me/" rel="next" title="Who is me?">
+                  <i class="fa fa-chevron-left"></i> Who is me?
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/08/24/统计初步/" rel="prev" title="统计初步">
+                  统计初步 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Inhaltsverzeichnis
+        </li>
+        <li class="sidebar-nav-overview">
+          Übersicht
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#等腰三角形（isosceles-triangle），指至少有两边相等的三角形，相等的两个边称为这个三角形的腰。"><span class="nav-number">1.</span> <span class="nav-text">等腰三角形（isosceles triangle），指至少有两边相等的三角形，相等的两个边称为这个三角形的腰。</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（废话！）"><span class="nav-number"></span> <span class="nav-text">（废话！）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（比较多，慢慢看）"><span class="nav-number"></span> <span class="nav-text">（比较多，慢慢看）</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#重磅头戏！——两圆一中垂"><span class="nav-number"></span> <span class="nav-text">重磅头戏！——两圆一中垂</span></a></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Liyou's Blog</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">Artikel</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    
+  
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liyou's Blog</span>
+</div>
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Design – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas>
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>
